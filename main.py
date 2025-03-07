@@ -5,21 +5,21 @@ import subprocess
 from transformers import AutoConfig
 
 # The 8bit, 4bit, ... models will not work (see README)
-# Predefined model aliases
 MODELS_ALIASES = {
-    # "qwq-32b-8bit": "mlx-community/QwQ-32B-Preview-8bit",
-    # "qwen-32b-8bit": "mlx-community/DeepSeek-R1-Distill-Qwen-32B-MLX-8Bit",
-    # "llama-70b-8bit": "mlx-community/Llama-3.3-70B-Instruct-8bit",
-    # "deepseek-70b-8bit": "mlx-community/DeepSeek-R1-Distill-Llama-70B-8bit",
     "mlx-deepseek-32b": "mlx-community/DeepSeek-R1-Distill-Qwen-32B",
     "llama-3b": "mlx-community/Llama-3.2-3B-Instruct",
 }
 
 # Parse command-line arguments
 def parse_args():
+    available_models = ", ".join(MODELS_ALIASES.keys())
     parser = argparse.ArgumentParser(description="Llama model download, conversion, and inference script.")
-    parser.add_argument("--model", type=str, required=True,
-                        help="Select a predefined model alias (e.g., 'deepseek-70b', 'qwen-32b') or specify a full Hugging Face model name.")
+    parser.add_argument(
+        "--model",
+        type=str,
+        required=True,
+        help=f"Select a predefined model alias ({available_models}) or specify a full Hugging Face model name."
+    )
     parser.add_argument("--skip-download", action="store_true", help="Skip downloading the model if it already exists.")
     parser.add_argument("--skip-conversion", action="store_true", help="Skip GGUF conversion if it already exists.")
     parser.add_argument("--run-model", action="store_true", help="Run the model after conversion for testing.")

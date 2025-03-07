@@ -1,6 +1,6 @@
 # Convert Hf model to gguf
 
-**IMPORTANT: The project is completely optimized for macOS. You need to adjust it for other operating systems.**
+**The `--run-model` part (including the llama.cpp build) is optimized for macOS. You need to adjust it for other operating systems. When you don't use this option you can ignore this.**
 
 ## Installation
 
@@ -117,7 +117,9 @@ cmake --build . --config Release
 
 ## Configuration
 
-### Recommended `n_gpu_layers` Settings for M4 Max (128GB RAM)
+### Recommended `n_gpu_layers` Settings for 128GB Unified Memory
+
+- Adjust it for your hardware in the `main.py` file in the `run_model` function.
 
 | Model Size  | `n_gpu_layers` Recommendation |
 |-------------|-------------------------------|
